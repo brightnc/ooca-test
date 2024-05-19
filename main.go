@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"math"
 )
 
 const (
@@ -11,21 +10,21 @@ const (
 )
 
 type Calculator struct {
-	menu       map[string]int
+	menu       map[string]float64
 	memberCard bool
 	orders     map[string]int
 }
 
 func NewCalculator(memberCard bool) *Calculator {
 	return &Calculator{
-		menu: map[string]int{
-			"Red":    50,
-			"Green":  40,
-			"Blue":   30,
-			"Yellow": 50,
-			"Pink":   80,
-			"Purple": 90,
-			"Orange": 120,
+		menu: map[string]float64{
+			"Red":    50.0,
+			"Green":  40.0,
+			"Blue":   30.0,
+			"Yellow": 50.0,
+			"Pink":   80.0,
+			"Purple": 90.0,
+			"Orange": 120.0,
 		},
 		memberCard: memberCard,
 		orders:     make(map[string]int),
@@ -41,11 +40,11 @@ func (c *Calculator) AddOrder(item string, quantity int) {
 }
 
 func (c *Calculator) CalculateTotal() (float64, int) {
-	totalPrice := 0.0
+	var totalPrice float64
 	totalDiscountPercentage := 0
 
 	for item, quantity := range c.orders {
-		totalPrice += float64(c.menu[item] * quantity)
+		totalPrice += c.menu[item] * float64(quantity)
 	}
 
 	if c.memberCard {
@@ -60,7 +59,7 @@ func (c *Calculator) CalculateTotal() (float64, int) {
 		}
 	}
 
-	totalPrice = math.Floor((totalPrice * (100 - float64(totalDiscountPercentage)) / 100))
+	totalPrice = totalPrice * float64(100-totalDiscountPercentage) / 100
 
 	return totalPrice, totalDiscountPercentage
 }

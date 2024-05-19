@@ -45,7 +45,7 @@ func TestCalculateTotal(t *testing.T) {
 		calculator.AddOrder("Red", 1)
 		calculator.AddOrder("Green", 1)
 		total, totalDiscountPercentage := calculator.CalculateTotal()
-		expectedTotal := float64(50 + 40)
+		expectedTotal := 50.0 + 40.0
 		expectedDiscount := 0
 		assert.Equal(expectedTotal, total, "Expected total %v", expectedTotal)
 		assert.Equal(expectedDiscount, totalDiscountPercentage, "Expected discount %v", expectedDiscount)
@@ -57,7 +57,7 @@ func TestCalculateTotal(t *testing.T) {
 		calculator.AddOrder("Blue", 2)
 		calculator.AddOrder("Purple", 1)
 		total, totalDiscountPercentage := calculator.CalculateTotal()
-		expectedTotal := float64((60 + 90) * 90 / 100) // 10% discount
+		expectedTotal := (60.0 + 90.0) * 90 / 100 // 10% discount
 		expectedDiscount := 10
 		assert.Equal(expectedTotal, total, "Expected total %v", expectedTotal)
 		assert.Equal(expectedDiscount, totalDiscountPercentage, "Expected discount %v", expectedDiscount)
@@ -69,19 +69,8 @@ func TestCalculateTotal(t *testing.T) {
 		calculator.AddOrder("Orange", 3)
 		calculator.AddOrder("Yellow", 1)
 		total, totalDiscountPercentage := calculator.CalculateTotal()
-		expectedTotal := float64((360 + 50) * 95 / 100) // 5% discount
+		expectedTotal := (360.0 + 50.0) * 95 / 100 // 5% discount
 		expectedDiscount := 5
-		assert.Equal(expectedTotal, total, "Expected total %v", expectedTotal)
-		assert.Equal(expectedDiscount, totalDiscountPercentage, "Expected discount %v", expectedDiscount)
-	})
-	t.Run("Case : With member card, have promotions", func(t *testing.T) {
-		assert := assert.New(t)
-		calculator := NewCalculator(true)
-		calculator.AddOrder("Orange", 3)
-		calculator.AddOrder("Yellow", 1)
-		total, totalDiscountPercentage := calculator.CalculateTotal()
-		expectedTotal := float64((360 + 50) * 85 / 100) // 15% discount
-		expectedDiscount := 15
 		assert.Equal(expectedTotal, total, "Expected total %v", expectedTotal)
 		assert.Equal(expectedDiscount, totalDiscountPercentage, "Expected discount %v", expectedDiscount)
 	})
@@ -92,7 +81,8 @@ func TestCalculateTotal(t *testing.T) {
 		calculator.AddOrder("Orange", 3)
 		calculator.AddOrder("Yellow", 1)
 		total, totalDiscountPercentage := calculator.CalculateTotal()
-		expectedTotal := float64((360 + 50) * 85 / 100) // 15% discount
+		expectedTotal := (360.0 + 50.0) * 85 / 100 // 15% discount
+		t.Logf("expectedTotal : %f", expectedTotal)
 		expectedDiscount := 15
 		assert.Equal(expectedTotal, total, "Expected total %v", expectedTotal)
 		assert.Equal(expectedDiscount, totalDiscountPercentage, "Expected discount %v", expectedDiscount)
@@ -104,7 +94,7 @@ func TestCalculateTotal(t *testing.T) {
 		calculator.AddOrder("Pink", 4)
 		calculator.AddOrder("Purple", 2)
 		total, totalDiscountPercentage := calculator.CalculateTotal()
-		expectedTotal := float64((320 + 180) * 85 / 100) // 15% discount
+		expectedTotal := (320.0 + 180.0) * 85 / 100 // 15% discount
 		expectedDiscount := 15
 		assert.Equal(expectedTotal, total, "Expected total %v", expectedTotal)
 		assert.Equal(expectedDiscount, totalDiscountPercentage, "Expected discount %v", expectedDiscount)
@@ -116,7 +106,7 @@ func TestCalculateTotal(t *testing.T) {
 		calculator.AddOrder("Pink", 4)
 		calculator.AddOrder("Purple", 2)
 		total, totalDiscountPercentage := calculator.CalculateTotal()
-		expectedTotal := float64((320 + 180) * 95 / 100) // 5% discount
+		expectedTotal := (320.0 + 180.0) * 95 / 100 // 5% discount
 		expectedDiscount := 5
 		assert.Equal(expectedTotal, total, "Expected total %v", expectedTotal)
 		assert.Equal(expectedDiscount, totalDiscountPercentage, "Expected discount %v", expectedDiscount)
